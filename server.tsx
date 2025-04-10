@@ -22,6 +22,7 @@ Bun.serve({
         headers: {
           "Content-Type": "text/html",
           "Transfer-Encoding": "chunked",
+          "Cache-Control": "no-store",
         },
       });
     },
@@ -29,7 +30,7 @@ Bun.serve({
     "/main.js": async () => {
       const buildOutput = await Bun.build({
         entrypoints: ["./main.js"],
-        minify: process.env.NODE_ENV === "production",
+        minify: true,
       });
       return new Response(await buildOutput.outputs[0].text(), {
         headers: {

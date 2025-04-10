@@ -11,7 +11,10 @@ type Album = {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const albumsPromise = fetch("http://localhost:8080/albums")
+const albumsPromise = fetch("http://localhost:8080/albums", {
+  cache: "no-store",
+  method: "GET",
+})
   .then((res) => {
     if (!res.ok) throw new Error("Failed to fetch posts");
     return res.json();
@@ -22,7 +25,6 @@ const albumsPromise = fetch("http://localhost:8080/albums")
 
 function AlbumsList() {
   const albumbs = use(albumsPromise) as Album[];
-
   return (
     <>
       {albumbs.map(({ id, title }) => (

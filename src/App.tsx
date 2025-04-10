@@ -1,7 +1,4 @@
-import { Suspense } from "react";
 import { Posts } from "./components/BlogPosts";
-import { Albums } from "./components/Albums";
-import Dogs from "./components/Dogs";
 
 export default function App() {
   return (
@@ -9,7 +6,6 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
         <title>My app</title>
       </head>
       <body>
