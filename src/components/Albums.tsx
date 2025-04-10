@@ -5,18 +5,19 @@ type Album = {
   id: number;
   title: string;
 };
+//http://localhost:8080/albums
 
-const albumsPromise = fetch("https://jsonplaceholder.typicode.com/albums")
+// async await 5 seconds delay
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const albumsPromise = fetch("http://localhost:8080/albums")
   .then((res) => {
     if (!res.ok) throw new Error("Failed to fetch posts");
     return res.json();
   })
   .then((data) => {
-    return new Promise<Album[]>((resolve) => {
-      setTimeout(() => {
-        resolve(data);
-      }, 3000);
-    });
+    return data;
   });
 
 function AlbumsList() {
@@ -33,11 +34,11 @@ function AlbumsList() {
   );
 }
 
-export function Albumbs() {
+export function Albums() {
   return (
     <div>
       <div>
-        <Suspense fallback={<div>Loading posts...</div>}>
+        <Suspense fallback={<div>Loading albums...</div>}>
           <AlbumsList />
         </Suspense>
       </div>

@@ -17,27 +17,8 @@ Bun.serve({
           console.error("Error during rendering:", error);
         },
       });
-      const [stream1, stream2] = stream.tee();
 
-      const reader = stream2.getReader();
-
-      async function readAllChunks(streamReader: any) {
-        let result = "";
-        while (true) {
-          const { done, value } = await streamReader.read();
-          if (done) {
-            break;
-          }
-          result += value;
-        }
-        return result;
-      }
-
-      readAllChunks(reader).then((text) => {
-        console.log(text);
-      });
-
-      return new Response(stream1, {
+      return new Response(stream, {
         headers: {
           "Content-Type": "text/html",
           "Transfer-Encoding": "chunked",

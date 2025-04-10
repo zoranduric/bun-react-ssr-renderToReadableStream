@@ -7,21 +7,19 @@ type Post = {
   body: string;
 };
 
-const postsPromise = fetch("https://jsonplaceholder.typicode.com/posts")
+const postsPromise = fetch("http://localhost:8080/posts", {
+  cache: "no-store",
+})
   .then((res) => {
     if (!res.ok) throw new Error("Failed to fetch posts");
     return res.json();
   })
   .then((data) => {
-    return new Promise<Post[]>((resolve) => {
-      setTimeout(() => {
-        resolve(data);
-      }, 5000);
-    });
+    return data as Post[];
   });
 
 function PostsList() {
-  const posts = use(postsPromise) as Post[];
+  const posts = use(postsPromise);
 
   return (
     <>
